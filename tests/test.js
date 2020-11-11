@@ -1,14 +1,15 @@
 module.exports = {
     'Demo test ecosia.org': function (browser) {
-        browser
-            .url('https://www.ecosia.org/')
+        var ecosia = browser.page.ecosia_page();
+        ecosia
+            .navigate()
             .waitForElementVisible('body')
             .assert.titleContains('Ecosia')
-            .assert.visible('input[type=search]')
-            .setValue('input[type=search]', 'nightwatch')
-            .assert.visible('button[type=submit]')
-            .click('button[type=submit]')
-            .assert.containsText('.mainline-results', 'Nightwatch.js')
+            .assert.visible('@searchTxtbox')
+            .setValue('@searchTxtbox', 'nightwatch')
+            .assert.visible('@submitBtn')
+            .click('@submitBtn')
+            .assert.containsText('@results', 'Nightwatch.js')
             .end();
     }
 };
